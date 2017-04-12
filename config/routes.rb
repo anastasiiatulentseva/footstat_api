@@ -1,3 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :teams, only: [:show]
+  resources :matches, only: [:index]
+
+  namespace :stats do
+    resources :matches, only: [:show] do
+      resources :teams, only: [:show] do
+        resources :players, only: [:show]
+      end
+    end
+  end
+
 end
